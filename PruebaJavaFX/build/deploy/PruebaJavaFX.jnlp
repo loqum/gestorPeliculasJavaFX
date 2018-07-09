@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="PruebaJavaFX.jnlp">
+  <information>
+    <title>PruebaJavaFX</title>
+    <vendor>Ruben</vendor>
+    <description>MoviesDataBase</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="PruebaJavaFX.jar" size="16871" download="eager" />
+    <jar href="libs\controlsfx-8.40.14.jar" size="1215643" download="eager" />
+  </resources>
+  <jfx:javafx-desc  width="0" height="0" main-class="com.rfm.address.MainApp"  name="MoviesDataBase" />
+  <update check="background"/>
+</jnlp>
