@@ -6,10 +6,10 @@ import java.util.prefs.Preferences;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import com.rfm.address.model.Person;
-import com.rfm.address.model.PersonListWrapper;
-import com.rfm.address.view.PersonEditDialogController;
-import com.rfm.address.view.PersonOverviewController;
+import com.rfm.address.model.Pelicula;
+import com.rfm.address.model.PeliculaListWrapper;
+import com.rfm.address.view.PeliculaEditDialogController;
+import com.rfm.address.view.PeliculaOverviewController;
 import com.rfm.address.view.RootLayoutController;
 
 import javafx.application.Application;
@@ -33,33 +33,25 @@ public class MainApp extends Application {
     // ... AFTER THE OTHER VARIABLES ...
 
     /**
-     * The data as an observable list of Persons.
+     * The data as an observable list of peliculas.
      */
-    private ObservableList<Person> personData = FXCollections.observableArrayList();
+    private ObservableList<Pelicula> peliculaData = FXCollections.observableArrayList();
 
     /**
      * Constructor
      */
     public MainApp() {
 	// Add some sample data
-	personData.add(new Person("Hans", "Muster"));
-	personData.add(new Person("Ruth", "Mueller"));
-	personData.add(new Person("Heinz", "Kurz"));
-	personData.add(new Person("Cornelia", "Meier"));
-	personData.add(new Person("Werner", "Meyer"));
-	personData.add(new Person("Lydia", "Kunz"));
-	personData.add(new Person("Anna", "Best"));
-	personData.add(new Person("Stefan", "Meier"));
-	personData.add(new Person("Martin", "Mueller"));
+	
     }
 
     /**
-     * Returns the data as an observable list of Persons.
+     * Returns the data as an observable list of peliculas.
      * 
      * @return
      */
-    public ObservableList<Person> getPersonData() {
-	return personData;
+    public ObservableList<Pelicula> getPeliculaData() {
+	return peliculaData;
     }
 
     // ... THE REST OF THE CLASS ...
@@ -67,19 +59,19 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
 	this.primaryStage = primaryStage;
-	this.primaryStage.setTitle("AddressApp");
+	this.primaryStage.setTitle("MoviesDataBase");
 
 	this.primaryStage.getIcons()
 		.add(new Image("file:resources/images/if_icontexto-aurora-folders-movies_27642.png"));
 
 	initRootLayout();
 
-	showPersonOverview();
+	showPeliculaOverview();
     }
 
     /**
      * Initializes the root layout and tries to load the last opened
-     * person file.
+     * pelicula file.
      */
     public void initRootLayout() {
         try {
@@ -102,28 +94,28 @@ public class MainApp extends Application {
             e.printStackTrace();
         }
 
-        // Try to load last opened person file.
-        File file = getPersonFilePath();
+        // Try to load last opened pelicula file.
+        File file = getPeliculaFilePath();
         if (file != null) {
-            loadPersonDataFromFile(file);
+            loadPeliculaDataFromFile(file);
         }
     }
 
     /**
-     * Shows the person overview inside the root layout.
+     * Shows the pelicula overview inside the root layout.
      */
-    public void showPersonOverview() {
+    public void showPeliculaOverview() {
 	try {
-	    // Load person overview.
+	    // Load pelicula overview.
 	    FXMLLoader loader = new FXMLLoader();
-	    loader.setLocation(MainApp.class.getResource("view/PersonOverview.fxml"));
-	    AnchorPane personOverview = (AnchorPane) loader.load();
+	    loader.setLocation(MainApp.class.getResource("view/PeliculaOverview.fxml"));
+	    AnchorPane peliculaOverview = (AnchorPane) loader.load();
 
-	    // Set person overview into the center of root layout.
-	    rootLayout.setCenter(personOverview);
+	    // Set pelicula overview into the center of root layout.
+	    rootLayout.setCenter(peliculaOverview);
 
 	    // Give the controller access to the main app.
-	    PersonOverviewController controller = loader.getController();
+	    PeliculaOverviewController controller = loader.getController();
 	    controller.setMainApp(this);
 
 	} catch (IOException e) {
@@ -132,33 +124,33 @@ public class MainApp extends Application {
     }
 
     /**
-     * Opens a dialog to edit details for the specified person. If the user clicks
-     * OK, the changes are saved into the provided person object and true is
+     * Opens a dialog to edit details for the specified pelicula. If the user clicks
+     * OK, the changes are saved into the provided pelicula object and true is
      * returned.
      * 
-     * @param person
-     *            the person object to be edited
+     * @param pelicula
+     *            the  object to be edited
      * @return true if the user clicked OK, false otherwise.
      */
-    public boolean showPersonEditDialog(Person person) {
+    public boolean showPeliculaEditDialog(Pelicula pelicula) {
 	try {
 	    // Load the fxml file and create a new stage for the popup dialog.
 	    FXMLLoader loader = new FXMLLoader();
-	    loader.setLocation(MainApp.class.getResource("view/PersonEditDialog.fxml"));
+	    loader.setLocation(MainApp.class.getResource("view/PeliculaEditDialog.fxml"));
 	    AnchorPane page = (AnchorPane) loader.load();
 
 	    // Create the dialog Stage.
 	    Stage dialogStage = new Stage();
-	    dialogStage.setTitle("Edit Person");
+	    dialogStage.setTitle("Edit Pelicula");
 	    dialogStage.initModality(Modality.WINDOW_MODAL);
 	    dialogStage.initOwner(primaryStage);
 	    Scene scene = new Scene(page);
 	    dialogStage.setScene(scene);
 
-	    // Set the person into the controller.
-	    PersonEditDialogController controller = loader.getController();
+	    // Set the pelicula into the controller.
+	    PeliculaEditDialogController controller = loader.getController();
 	    controller.setDialogStage(dialogStage);
-	    controller.setPerson(person);
+	    controller.setPelicula(pelicula);
 
 	    // Show the dialog and wait until the user closes it
 	    dialogStage.showAndWait();
@@ -171,13 +163,13 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns the person file preference, i.e. the file that was last opened. The
+     * Returns the pelicula file preference, i.e. the file that was last opened. The
      * preference is read from the OS specific registry. If no such preference can
      * be found, null is returned.
      * 
      * @return
      */
-    public File getPersonFilePath() {
+    public File getPeliculaFilePath() {
 	Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
 	String filePath = prefs.get("filePath", null);
 	if (filePath != null) {
@@ -194,7 +186,7 @@ public class MainApp extends Application {
      * @param file
      *            the file or null to remove the path
      */
-    public void setPersonFilePath(File file) {
+    public void setPeliculaFilePath(File file) {
 	Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
 	if (file != null) {
 	    prefs.put("filePath", file.getPath());
@@ -210,24 +202,24 @@ public class MainApp extends Application {
     }
 
     /**
-     * Loads person data from the specified file. The current person data will be
+     * Loads pelicula data from the specified file. The current pelicula data will be
      * replaced.
      * 
      * @param file
      */
-    public void loadPersonDataFromFile(File file) {
+    public void loadPeliculaDataFromFile(File file) {
 	try {
-	    JAXBContext context = JAXBContext.newInstance(PersonListWrapper.class);
+	    JAXBContext context = JAXBContext.newInstance(PeliculaListWrapper.class);
 	    Unmarshaller um = context.createUnmarshaller();
 
 	    // Reading XML from the file and unmarshalling.
-	    PersonListWrapper wrapper = (PersonListWrapper) um.unmarshal(file);
+	    PeliculaListWrapper wrapper = (PeliculaListWrapper) um.unmarshal(file);
 
-	    personData.clear();
-	    personData.addAll(wrapper.getPersons());
+	    peliculaData.clear();
+	    peliculaData.addAll(wrapper.getPeliculas());
 
 	    // Save the file path to the registry.
-	    setPersonFilePath(file);
+	    setPeliculaFilePath(file);
 
 	} catch (Exception e) { // catches ANY exception
 	    Alert alert = new Alert(AlertType.ERROR);
@@ -238,25 +230,25 @@ public class MainApp extends Application {
     }
 
     /**
-     * Saves the current person data to the specified file.
+     * Saves the current pelicula data to the specified file.
      * 
      * @param file
      */
-    public void savePersonDataToFile(File file) {
+    public void savePeliculaDataToFile(File file) {
 	try {
-	    JAXBContext context = JAXBContext.newInstance(PersonListWrapper.class);
+	    JAXBContext context = JAXBContext.newInstance(PeliculaListWrapper.class);
 	    Marshaller m = context.createMarshaller();
 	    m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-	    // Wrapping our person data.
-	    PersonListWrapper wrapper = new PersonListWrapper();
-	    wrapper.setPersons(personData);
+	    // Wrapping our pelicula data.
+	    PeliculaListWrapper wrapper = new PeliculaListWrapper();
+	    wrapper.setPeliculas(peliculaData);
 
 	    // Marshalling and saving XML to the file.
 	    m.marshal(wrapper, file);
 
 	    // Save the file path to the registry.
-	    setPersonFilePath(file);
+	    setPeliculaFilePath(file);
 	} catch (Exception e) { // catches ANY exception
 	    Alert alert = new Alert(AlertType.ERROR);
 	    alert.setTitle("Error");

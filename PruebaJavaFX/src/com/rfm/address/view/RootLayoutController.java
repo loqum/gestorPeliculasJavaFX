@@ -35,8 +35,8 @@ public class RootLayoutController {
      */
     @FXML
     private void handleNew() {
-        mainApp.getPersonData().clear();
-        mainApp.setPersonFilePath(null);
+        mainApp.getPeliculaData().clear();
+        mainApp.setPeliculaFilePath(null);
     }
 
     /**
@@ -55,7 +55,7 @@ public class RootLayoutController {
         File file = fileChooser.showOpenDialog(mainApp.getPrimaryStage());
 
         if (file != null) {
-            mainApp.loadPersonDataFromFile(file);
+            mainApp.loadPeliculaDataFromFile(file);
         }
     }
 
@@ -65,9 +65,9 @@ public class RootLayoutController {
      */
     @FXML
     private void handleSave() {
-        File personFile = mainApp.getPersonFilePath();
-        if (personFile != null) {
-            mainApp.savePersonDataToFile(personFile);
+        File peliculaFile = mainApp.getPeliculaFilePath();
+        if (peliculaFile != null) {
+            mainApp.savePeliculaDataToFile(peliculaFile);
         } else {
             handleSaveAs();
         }
@@ -93,7 +93,7 @@ public class RootLayoutController {
             if (!file.getPath().endsWith(".xml")) {
                 file = new File(file.getPath() + ".xml");
             }
-            mainApp.savePersonDataToFile(file);
+            mainApp.savePeliculaDataToFile(file);
         }
     }
 
