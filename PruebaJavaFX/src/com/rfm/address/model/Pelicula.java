@@ -17,12 +17,13 @@ public class Pelicula {
     private final StringProperty genero;
     private final IntegerProperty year;
     private final StringProperty soporte;
+    private final IntegerProperty idpeliculas;
 
     /**
      * Default constructor.
      */
     public Pelicula() {
-	this(null, null, null, 0, null);
+	this(null, null, null, 0, null, 0);
     }
 
     /**
@@ -31,13 +32,15 @@ public class Pelicula {
      * @param firstName
      * @param lastName
      */
-    public Pelicula(String titulo, String director, String genero, int year, String soporte) {
+    public Pelicula(String titulo, String director, String genero, int year, String soporte, int id) {
 	this.titulo = new SimpleStringProperty(titulo);
 	this.director = new SimpleStringProperty(director);
 	this.genero = new SimpleStringProperty(genero);
 	this.year = new SimpleIntegerProperty(year);
 	this.soporte = new SimpleStringProperty(soporte);
+	this.idpeliculas = new SimpleIntegerProperty(id);
     }
+    
 
     public String getTitulo() {
 	return titulo.get();
@@ -97,6 +100,18 @@ public class Pelicula {
 
     public StringProperty soporteProperty() {
 	return soporte;
+    }
+    
+    public int getIdPeliculas() {
+	return idpeliculas.get();
+    }
+    
+    public void setIdPeliculas(int idPeliculas) {
+	this.idpeliculas.set(idPeliculas);
+    }
+
+    public IntegerProperty idPeliculasProperty() {
+	return idpeliculas;
     }
 
 }

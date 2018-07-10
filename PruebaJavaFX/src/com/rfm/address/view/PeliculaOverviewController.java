@@ -124,6 +124,7 @@ public class PeliculaOverviewController {
 	boolean okClicked = mainApp.showPeliculaEditDialog(tempPelicula);
 	if (okClicked) {
 	    mainApp.getPeliculaData().add(tempPelicula);
+	    
 	}
     }
 

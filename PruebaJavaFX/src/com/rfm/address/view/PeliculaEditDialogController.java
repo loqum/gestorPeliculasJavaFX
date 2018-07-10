@@ -1,5 +1,7 @@
 package com.rfm.address.view;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -13,6 +15,8 @@ import com.rfm.address.model.Pelicula;
  * @author Marco Jakob
  */
 public class PeliculaEditDialogController {
+
+    public ObservableList<Pelicula> dataPelicula = FXCollections.observableArrayList();
 
     @FXML
     private TextField tituloField;
@@ -137,12 +141,13 @@ public class PeliculaEditDialogController {
 	} else {
 	    // Show the error message.
 	    Alert alert = new Alert(AlertType.ERROR);
-	    alert.setTitle("Invalid Fields");
-	    alert.setHeaderText("Ooops, there was an error!");
-	    alert.setContentText("Please, correct invalid fields.");
+	    alert.setTitle("Campos incorrectos");
+	    alert.setHeaderText("Vaya, parece que ha habido un error!");
+	    alert.setContentText("Por favor, rellena correctamente todos los campos.");
 
 	    alert.showAndWait();
 	    return false;
 	}
     }
+
 }

@@ -12,23 +12,14 @@
         <menus>
           <Menu mnemonicParsing="false" text="Archivo">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#handleNew" text="Nuevo">
-                     <accelerator>
-                        <KeyCodeCombination alt="UP" code="N" control="ANY" meta="UP" shift="UP" shortcut="UP" />
-                     </accelerator></MenuItem>
-                  <MenuItem mnemonicParsing="false" onAction="#handleOpen" text="Abrir...">
-                     <accelerator>
-                        <KeyCodeCombination alt="UP" code="O" control="ANY" meta="UP" shift="UP" shortcut="UP" />
-                     </accelerator>
-                  </MenuItem>
                   <MenuItem mnemonicParsing="false" onAction="#handleSave" text="Guardar">
                      <accelerator>
-                        <KeyCodeCombination alt="UP" code="S" control="ANY" meta="UP" shift="UP" shortcut="UP" />
+                        <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
                   </MenuItem>
                   <MenuItem mnemonicParsing="false" onAction="#handleSaveAs" text="Guardar como...">
                      <accelerator>
-                        <KeyCodeCombination alt="UP" code="S" control="ANY" meta="UP" shift="ANY" shortcut="UP" />
+                        <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
                      </accelerator>
                   </MenuItem>
                   <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Salir" />

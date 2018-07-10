@@ -30,34 +30,6 @@ public class RootLayoutController {
         this.mainApp = mainApp;
     }
 
-    /**
-     * Creates an empty address book.
-     */
-    @FXML
-    private void handleNew() {
-        mainApp.getPeliculaData().clear();
-        mainApp.setPeliculaFilePath(null);
-    }
-
-    /**
-     * Opens a FileChooser to let the user select an address book to load.
-     */
-    @FXML
-    private void handleOpen() {
-        FileChooser fileChooser = new FileChooser();
-
-        // Set extension filter
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
-                "XML files (*.xml)", "*.xml");
-        fileChooser.getExtensionFilters().add(extFilter);
-
-        // Show save file dialog
-        File file = fileChooser.showOpenDialog(mainApp.getPrimaryStage());
-
-        if (file != null) {
-            mainApp.loadPeliculaDataFromFile(file);
-        }
-    }
 
     /**
      * Saves the file to the person file that is currently open. If there is no
